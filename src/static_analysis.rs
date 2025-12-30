@@ -203,12 +203,12 @@ impl<'a> Analysis<'a> {
             dfg_forward_edges: BTreeMap::new(),
             dfg_reverse_edges: BTreeMap::new(),
         };
-        result.split_into_basic_blocks(false, executable.get_sbpf_version());
+        result.split_into_basic_blocks(true, executable.get_sbpf_version());
         result.control_flow_graph_tarjan();
         result.control_flow_graph_dominance_hierarchy();
         result.label_basic_blocks();
-        let basic_block_outputs = result.intra_basic_block_data_flow(executable.get_sbpf_version());
-        result.inter_basic_block_data_flow(basic_block_outputs);
+        // let basic_block_outputs = result.intra_basic_block_data_flow(executable.get_sbpf_version());
+        // result.inter_basic_block_data_flow(basic_block_outputs);
         Ok(result)
     }
 
